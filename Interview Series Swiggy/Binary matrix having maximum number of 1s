@@ -1,0 +1,30 @@
+class Solution {
+public:
+    struct comparator{
+      bool operator() ( pair<int, int> &x, pair<int, int> &y){
+          if(x.second == y.second){
+              return x.first > y.first;
+          }
+          return x.second < y.second;
+      }  
+    };
+    vector<int> findMaxRow(vector<vector<int>> mat, int N) {
+        //code here
+        priority_queue<pair<int, int>, vector<pair<int, int>>, comparator> pq;
+        for(int i=0;i<mat.size();i++){
+            int c = 0;
+            for(int j=0;j<mat[i].size();j++){
+                if(mat[i][j] == 1){
+                    c++;
+                }
+            }
+            pq.push({i, c});
+        }
+        vector<int> ans;
+        auto it = pq.top();
+        ans.push_back(it.first);
+        ans.push_back(it.second);
+        return ans;
+        
+    }
+};
